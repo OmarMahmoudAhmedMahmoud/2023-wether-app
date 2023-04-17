@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="theme-color" content="#99D376" />
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wither drbka</title>
+<link rel="stylesheet" href="" id="css"   >
+<script type="text/javascript">
 
+window.onload=setCss();
+function setCss(){
+
+let cssLink=document.getElementById("css");
+
+if(window.innerWidth<window.innerHeight){
+   cssLink.href=`portrait.css`;
+
+}else{
+   cssLink.href=`wide.css`;}
+
+}//end function
+
+</script>
+</head>
+<body onresize="setCss()">
+
+  <header>
+    <h1>Wether</h1>
+    <h6>Add a little bit of body text</h6>
+  </header>
+   
+   <main>
+   
+    <section id="conten" >
+    
+      <div id="table-title" >
+       <p>Name</p>
+       <p>Template</p>
+       <p>Time</p>
+      </div>
+      <div id="table-body" >
+      
+       <!-- <section id="table-row" >
+          <div>Egypt</div>
+          <div>15</div>
+          <div>22:09</div>
+        </section>
+        -->
+         
+         
+      
+      </div>
+      
+      <aside id="add-table-row" >
+        <div id="add-table-row-main" >
+      
+        <select name="place" id="input" >
+      
+            <option value="Egypt" >egypt</option>
+            <option value="Paris">paris</option>
+            <option value="London">london</option>
+            <option value="Morocco">morocco</option>
+            
+            <option value="russian" >russian</option>
+            <option value="syria" >syria</option>
+            <option value="libya" >libya</option>
+            <option value="sudan" >sudan</option>
+            <option value="america" >america</option>
+            <option value="palestine" >palestine</option>
+            <option value="kuwait" >kuwait</option>
+            <option value="mauritania" >mauritania</option>
+            <option value="germany" >germany</option>
+            <option value="australia" >australia</option>
+            <option value="italy" >italy</option>
+            <option value="iraq" >iraq</option>
+            <option value="Canada" >Canada</option>
+            
+        
+        </select>
+       
+      <div id="add-btn" >
+      
+           <img src="imgs/add.png" alt="add-icon-png" id="btnAdd" onclick="addSec()" >
+      
+      </div>
+      
+      </div>
+      </aside>
+      
+      <div id="table-foot" >
+     
+       <img src="imgs/add.png" alt="add-icon-png" onclick="addBar()" id="btnAside" >
+      
+      
+      </div>
+      
+    </section>
+   
+   </main>
+  
+  
+  <footer>
+   © omar mahmud
+  </footer>
+
+<div id="loding" >
+  
+  <div id="loding-icon" >
+  </div>
+
+</div>
+
+<img src="imgs/cloud.png" id="cloud1" class="cloud"  >
+<img src="imgs/cloud.png" id="cloud2" class="cloud" >
+<img src="imgs/cloud.png" id="cloud3" class="cloud">
+<img src="imgs/cloud.png" id="cloud4" class="cloud" >
+<img src="imgs/cloud.png" id="cloud5" class="cloud" >
+<img src="imgs/cloud.png" id="cloud6" class="cloud" >
+<img src="imgs/cloud.png" id="cloud7" class="cloud" >
+
+
+<script type="text/javascript">
+
+function addBar(){
+
+let aside = document.getElementById("add-table-row");
+let btn = document.getElementById("btnAside");
+
+if(aside.value=="true"){
+btn.style.transform="rotate(0deg)";
+aside.style.right="-100%";
+aside.value="flase";
+}else{
+btn.style.transform="rotate(50deg)";
+aside.style.right="0%";
+aside.value="true";
+}
+
+}
+
+
+
+
+
+
+let i=0;
+async function addSec(){
+console.log("clik")
+let btn = document.getElementById("btnAdd");
+if(i==1){
+return 0;
+}
+
+i=1;
+document.getElementById("loding").style="display:grid";
+let input = document.getElementById("input");
+let api=`https://api.weatherapi.com/v1/current.json?key=47eba1ef49f24412bc0200435231602&q=${input.value}`;
+let Data = await fetch(api).then(res=>res.json());
+i=0;
+document.getElementById("loding").style="display:none";
+let aside = document.getElementById("add-table-row");
+let box = document.getElementById("table-body");
+
+aside.style.right="-100%";
+
+
+let btn2 = document.getElementById("btnAside");
+btn2.style.transform="rotate(0deg)";
+
+aside.value="false";
+
+
+
+let res =0;
+
+
+let box_c=document.getElementsByClassName("box-c");
+
+
+for(let i=0;i<box_c.length;i++){
+ if(Data.location.country==box_c[i].getAttribute("data-name")){
+ 
+  res+=1
+  
+ }
+
+}
+
+console.log(res);
+if(res == 0){
+
+  box.innerHTML+=`
+  
+  <section id="table-row" class="box-c" data-name="${Data.location.country}">
+  <div>${Data.location.country}</div>
+  <div>${Data.current.temp_c} <sup> c </sup></div>
+  <div>${Data.location.localtime}</div>
+  </section>
+  
+  `;
+
+}
+
+
+
+
+
+
+
+}
+//api http :
+//`https://api.weatherapi.com/v1/current.json?key=47eba1ef49f24412bc0200435231602&q=Egypt`
+
+
+</script>
+</body>
+</html>
