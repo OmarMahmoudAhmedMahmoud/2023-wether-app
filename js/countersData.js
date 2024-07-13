@@ -1,4 +1,4 @@
-countryList = [
+let countryList = [
 	"Afghanistan",
 	"Albania",
 	"Algeria",
@@ -249,3 +249,5 @@ countryList = [
 	"Zimbabwe",
 	"Åland Islands"
 ];
+
+

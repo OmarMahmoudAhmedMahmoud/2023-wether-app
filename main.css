@@ -153,7 +153,8 @@ width: fit-content;
     margin: auto;
 }
 #objects div{
-
+    opacity: 0;
+    transition:opacity .2s;
     width: 100%;
     background-color: 	rgb(59, 40, 204,.6);
     display: flex;
