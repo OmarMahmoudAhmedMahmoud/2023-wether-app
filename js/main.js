@@ -115,4 +115,6 @@ function render(){
     input.render()
 }
 
-render()
+document.body.onload=function(){
+    render()
+};
