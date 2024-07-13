@@ -36,6 +36,36 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+#loading{
+
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    inset: 0;
+    margin: auto;
+    aspect-ratio: 1;
+    background-color: #add7f6;
+    opacity: .9;
+    z-index: 999;
+    display: grid;
+    display: none;
+    place-items:center;
+}
+#loading .ele{
+    width: 20vw;
+    border-radius: 20%;
+    aspect-ratio: 1;
+    background-color: #3b28cc;
+    position: relative;
+    overflow: hidden;
+}
+#loading .ele::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    background-color: white;
+}
 
 :root {
     --5blue: #3b28cc;
@@ -360,7 +390,9 @@ body {
 
 
 @media only screen and (max-width: 600px) {
-
+    #loading .ele{
+        width: 30vw;
+    }
     /* for mobile*/
     #header {
 

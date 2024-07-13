@@ -80,7 +80,9 @@ const input = {
 
 
 async function getWether(area) {
+    loading()
     let data = await fetch(area);
+    loading()
     if (data.status != 200) {
         console.log(data.status);
         alert("error")
@@ -108,6 +110,30 @@ function addOptions() {
     }
 }
 
+let loading = (
+    function () {
+        let box = document.getElementById("loading")
+        let ele = document.getElementById("loadingEle")
+        let bool = false;
+        let deg = 7 ;
+        let anime;
+        return function() {
+            bool?bool=false:bool=true;
+
+            if (bool) {
+                box.style.display="grid"
+                anime = setInterval(function() {
+                    deg+=7;
+                    ele.style.transform=`rotate(${deg}deg)`;
+                })
+            } else {
+                box.style.display="none"
+                clearInterval(anime)
+                deg=0;
+            }
+        }
+    }
+)();
 
 
 function render(){
