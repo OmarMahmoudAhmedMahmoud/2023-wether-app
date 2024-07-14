@@ -40,6 +40,8 @@ const input = {
 
     add:function(){
         this.match.style="display: none;";
+
+        this.inputFeld.value = this.inputFeld.value.trim();
         if(!countryList.includes(this.inputFeld.value.toUpperCase())){
             console.log("not-found");
             return;
@@ -50,7 +52,7 @@ const input = {
 
     check:function(){
         this.match.style.display ="block;";
-        if (countryList.includes(this.inputFeld.value.toUpperCase())) {
+        if (countryList.includes(this.inputFeld.value.toUpperCase().trim())) {
             this.match.style="color:rgb(43, 226, 55,.7);"
             this.match.textContent="match"
         }else{
@@ -81,7 +83,12 @@ const input = {
 
 async function getWether(area) {
     loading()
-    let data = await fetch(area);
+    try{
+        let data = await fetch(area);
+    }catch{
+        loading()
+        return
+    }
     loading()
     if (data.status != 200) {
         console.log(data.status);
