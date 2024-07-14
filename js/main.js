@@ -83,18 +83,18 @@ const input = {
 
 async function getWether(area) {
     loading()
-    try{
-        let data = await fetch(area);
-    }catch{
-        loading()
-        return
-    }
+    let data
+
+    try {
+        data = await fetch(area);
+    } catch (error) {
+        
+    }   
     loading()
-    if (data.status != 200) {
-        console.log(data.status);
-        alert("error")
+    if (data == undefined) {
         return;
     }
+
     data = await data.json();
     wetherBoxes.push(
         new AddWether(
@@ -105,6 +105,16 @@ async function getWether(area) {
     )
 
 }
+
+
+
+
+
+
+
+
+
+
 
 function addOptions() {
     for (let i = 0; i < countryList.length; i++) {
