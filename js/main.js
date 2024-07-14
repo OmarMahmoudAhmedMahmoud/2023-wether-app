@@ -39,8 +39,6 @@ const input = {
         })(),
 
     add:function(){
-        this.match.style="display: none;";
-
         this.inputFeld.value = this.inputFeld.value.trim();
         if(!countryList.includes(this.inputFeld.value.toUpperCase())){
             console.log("not-found");
@@ -55,9 +53,11 @@ const input = {
         if (countryList.includes(this.inputFeld.value.toUpperCase().trim())) {
             this.match.style="color:rgb(43, 226, 55,.7);"
             this.match.textContent="match"
+            return true
         }else{
             this.match.style="color:rgba(226, 43, 43, 0.7);"
             this.match.textContent="not match"
+            return false
         }
     },
 
@@ -70,6 +70,19 @@ const input = {
             input.check()
             input.match.style="display: none;"
         });
+
+        input.inputFeld.addEventListener("keydown",function (e) {
+            if (e.keyCode == 13 ) {
+                input.check()
+                if (input.check()) {
+                    input.add()
+                    
+                }
+                input.match.style="display: none;"
+            }
+        
+        });
+
 
         this.addbtn.addEventListener("click",function () {
             input.add()
